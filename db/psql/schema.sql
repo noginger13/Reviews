@@ -74,10 +74,7 @@ CREATE TABLE reviews_photos (
 );
 
 --COPY CSV DATA
-COPY eviews_photos
-  FROM '/Users/michaelschoenecker/Documents/hackreactor/rfe-neptunium/Reviews/db/data/eviews_photos.csv'
+COPY reviews_photos
+  FROM '/Users/michaelschoenecker/Documents/hackreactor/rfe-neptunium/Reviews/db/data/reviews_photos.csv'
   DELIMITER ','
   CSV HEADER;
-
-
-
