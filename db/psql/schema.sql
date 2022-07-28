@@ -14,13 +14,18 @@ CREATE DATABASE reviewapi
     IS_TEMPLATE = False;
 
 
+--DROP TABLES
+DROP TABLE IF EXISTS characteristic_reviews;
+DROP TABLE IF EXISTS reviews_photos;
+DROP TABLE IF EXISTS reviews;
+
+
 --REVIEWS
 
 --CREATE TABLE
-DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE reviews (
-  id integer PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   product_id integer NOT NULL,
   rating integer NOT NULL,
   date bigint,
@@ -44,10 +49,8 @@ COPY reviews
 --CHARACTERISTIC REVIEWS
 
 --CREATE TABLE
-
-DROP TABLE IF EXISTS characteristic_reviews;
 CREATE TABLE characteristic_reviews (
-  id integer PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   characteristic_id integer,
   review_id integer,
   value integer,
@@ -64,10 +67,8 @@ COPY characteristic_reviews
 --REVIEWS PHOTOS
 
 --CREATE TABLE
-
-DROP TABLE IF EXISTS reviews_photos;
 CREATE TABLE reviews_photos (
-  id integer PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   review_id integer,
   url text,
   FOREIGN KEY (review_id) REFERENCES reviews
@@ -78,3 +79,4 @@ COPY reviews_photos
   FROM '/Users/michaelschoenecker/Documents/hackreactor/rfe-neptunium/Reviews/db/data/reviews_photos.csv'
   DELIMITER ','
   CSV HEADER;
+
