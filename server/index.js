@@ -18,7 +18,7 @@ app.get('/reviews/meta', (req, res) => {
   res.status(200);
 });
 
-app.post('/reviews/meta', (req, res) => {
+app.post('/reviews/', (req, res) => {
   res.status(201);
 });
 
