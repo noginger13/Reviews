@@ -8,9 +8,28 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  console.log(req.body);
-  res.sendStatus(200);
+app.get('/reviews/', (req, res) => {
+  console.log('reviews', req.query);
+  res.status(200);
+});
+
+app.get('/reviews/meta', (req, res) => {
+  console.log('reviews', req.query);
+  res.status(200);
+});
+
+app.post('/reviews/meta', (req, res) => {
+  res.status(201);
+});
+
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  console.log('helpful', req.params.review_id);
+  res.sendStatus(204);
+});
+
+app.put('/reviews/:review_id/report', (req, res) => {
+  console.log('report', req.params.review_id);
+  res.sendStatus(204);
 });
 
 app.listen(process.env.PORT, () => {
