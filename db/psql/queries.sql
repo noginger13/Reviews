@@ -13,6 +13,8 @@ offset 0 limit 15;
 
 --METADATA product_id=?
 select json_build_object(
+	'product_id',
+	'12',
 	'ratings',
 	(
 		select json_object_agg(rv.rating, rv.count)

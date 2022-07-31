@@ -1,22 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 
-//Databases
-const db = require('../db/psql/db.js');
+//Controllers
+const getReviews = require('./controllers/getReviews.js');
+const getMetadata = require('./controllers/getMetadata.js');
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/reviews/', (req, res) => {
-  console.log('reviews', req.query);
-  res.status(200);
-});
+app.get('/reviews/', getReviews);
 
-app.get('/reviews/meta', (req, res) => {
-  console.log('reviews', req.query);
-  res.status(200);
-});
+app.get('/reviews/meta', getMetadata);
 
 app.post('/reviews/', (req, res) => {
   res.status(201);

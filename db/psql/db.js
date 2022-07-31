@@ -10,7 +10,5 @@ client.connect().then(() => {
 });
 
 const pool = new Pool();
-pool.query('SELECT * FROM reviews WHERE id=54', (err, res) => {
-  console.log(err, res.rows);
-  pool.end();
-});
+
+module.exports = pool;
