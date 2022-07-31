@@ -4,11 +4,11 @@ const pool = require('../../db/psql/db.js');
 //GET /Reviews/
 module.exports = getReviews = (req, res) => {
   let productId = Number(req.query.product_id);
-  let page = Number(req.query.page) || 1;
+  let page = Number(req.query.page) || 0;
   let count = Number(req.query.count) || 5;
   let sort = req.query.sort || 'relevant';
 
-  let offset = (page - 1) * count;
+  let offset = (page) * count;
   let limit = page * count;
 
   let sortString = 'r.helpfulness desc, r.date desc';
