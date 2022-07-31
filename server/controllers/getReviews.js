@@ -31,7 +31,7 @@ module.exports = getReviews = (req, res) => {
     from reviews_photos rp
     where rp.review_id = r.id
     ) rp on true
-  where r.product_id = ${productId}
+  where r.product_id = ${productId} and reported = false
   order by ${sortString}
   offset ${offset} limit ${limit};`;
 

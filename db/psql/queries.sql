@@ -1,5 +1,4 @@
--- reviews r.product_id, offset = page * count, limit = count, sort = order by
-
+-- REVIEWS
 select r.id as review_id, r.rating, r.summary, r.recommend, r.response, r.body, r.date, r.reviewer_name, r.helpfulness, coalesce(rp.photos, '[]') as photos
 from reviews r
 left join lateral (
@@ -7,11 +6,11 @@ left join lateral (
 	from reviews_photos rp
 	where rp.review_id = r.id
 	) rp on true
-where r.product_id = 12
+where r.product_id = 12 and reported = false
 order by r.helpfulness desc, r.date desc
 offset 0 limit 15;
 
---METADATA product_id=?
+--METADATA
 select json_build_object(
 	'product_id',
 	'12',
@@ -51,3 +50,8 @@ select json_build_object(
 												  ) as cv)
 
 ) as metadata;
+
+--HELPFULNESS
+update reviews
+set helpfulness = helpfulness + 1
+where id = 12;

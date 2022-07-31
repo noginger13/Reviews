@@ -107,6 +107,7 @@ CREATE INDEX reviews_helpfulness_index ON reviews (helpfulness);
 CREATE INDEX review_id_index ON reviews (id);
 CREATE INDEX reviews_product_id_index ON reviews (product_id);
 CREATE INDEX reviews_rating_index ON reviews (rating);
+CREATE INDEX reviews_reported_index ON reviews (reported);
 
 --CHARACTERISTICS
 CREATE INDEX characteristics_id_index ON characteristics (id);
