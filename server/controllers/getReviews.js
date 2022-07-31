@@ -8,8 +8,8 @@ module.exports = getReviews = (req, res) => {
   let count = Number(req.query.count) || 5;
   let sort = req.query.sort || 'relevant';
 
-  let offset = (page) * count;
-  let limit = page * count;
+  let offset = page * count;
+  let limit = (page + 1) * count;
 
   let sortString = 'r.helpfulness desc, r.date desc';
   if (sort === 'helpfulness') {
