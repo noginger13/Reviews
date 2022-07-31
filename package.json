@@ -4,7 +4,8 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "server-dev": "nodemon --watch db --watch server server/index.js"
+    "server-dev": "nodemon --watch db --watch server server/index.js",
+    "build-db": " psql -d reviewapi -f db/psql/schema.sql"
   },
   "dependencies": {
     "dotenv": "^16.0.1",

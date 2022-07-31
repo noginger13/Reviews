@@ -15,6 +15,7 @@ CREATE DATABASE reviewapi
 
 
 --DROP TABLES
+DROP TABLE IF EXISTS characteristics;
 DROP TABLE IF EXISTS characteristic_reviews;
 DROP TABLE IF EXISTS reviews_photos;
 DROP TABLE IF EXISTS reviews;
@@ -46,6 +47,24 @@ COPY reviews
   CSV HEADER;
 
 
+--CHARACTERISTICS
+
+--CREATE TABLE
+CREATE TABLE characteristics (
+  id SERIAL PRIMARY KEY,
+  product_id integer,
+  name text,
+  FOREIGN KEY (product_id) REFERENCES reviews(id)
+);
+
+--COPY CSV DATA
+COPY characteristics
+  FROM '/Users/michaelschoenecker/Documents/hackreactor/rfe-neptunium/Reviews/db/data/characteristics.csv'
+  DELIMITER ','
+  CSV HEADER;
+
+
+
 --CHARACTERISTIC REVIEWS
 
 --CREATE TABLE
@@ -54,7 +73,7 @@ CREATE TABLE characteristic_reviews (
   characteristic_id integer,
   review_id integer,
   value integer,
-  FOREIGN KEY (review_id) REFERENCES reviews
+  FOREIGN KEY (review_id) REFERENCES reviews(id)
 );
 
 --COPY CSV DATA
@@ -63,7 +82,6 @@ COPY characteristic_reviews
   DELIMITER ','
   CSV HEADER;
 
-
 --REVIEWS PHOTOS
 
 --CREATE TABLE
@@ -71,7 +89,7 @@ CREATE TABLE reviews_photos (
   id SERIAL PRIMARY KEY,
   review_id integer,
   url text,
-  FOREIGN KEY (review_id) REFERENCES reviews
+  FOREIGN KEY (review_id) REFERENCES reviews(id)
 );
 
 --COPY CSV DATA
@@ -80,3 +98,23 @@ COPY reviews_photos
   DELIMITER ','
   CSV HEADER;
 
+
+--CREATE INDICES
+
+--REVIEWS
+CREATE INDEX reviews_date_index ON reviews (date);
+CREATE INDEX reviews_helpfulness_index ON reviews (helpfulness);
+CREATE INDEX review_id_index ON reviews (id);
+CREATE INDEX reviews_product_id_index ON reviews (product_id);
+CREATE INDEX reviews_rating_index ON reviews (rating);
+
+--CHARACTERISTICS
+CREATE INDEX characteristics_id_index ON characteristics (id);
+CREATE INDEX characteristics_product_id_index ON characteristics (product_id);
+
+--CHARACTERISTIC_REVIEWS
+CREATE INDEX characteristic_reviews_characteristic_id_index ON characteristic_reviews (characteristic_id);
+CREATE INDEX characteristic_reviews_review_id_index ON characteristic_reviews (review_id);
+
+--REVIEWS_PHOTOS
+CREATE INDEX reviews_photos_review_id_index ON reviews_photos (review_id);
