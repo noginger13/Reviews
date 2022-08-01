@@ -51,7 +51,22 @@ select json_build_object(
 
 ) as metadata;
 
+--REVIEW POST
+--REVIEWS
+
+--Date
+(select (round(extract(epoch from now()) * 1000)) as date)
+--REVIEWS PHOTOS
+
+--REVIEWS CHAR
+
+
 --HELPFULNESS
 update reviews
 set helpfulness = helpfulness + 1
+where id = 12;
+
+--REPORT
+update reviews
+set helpfulness = true
 where id = 12;

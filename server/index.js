@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 
 //Controllers
-const getReviews = require('./controllers/getReviews.js');
 const getMetadata = require('./controllers/getMetadata.js');
+const getReviews = require('./controllers/getReviews.js');
+const postReview = require('./controllers/postReview.js');
 const putHelpful = require('./controllers/putHelpful.js');
 const putReport = require('./controllers/putReport.js');
 
@@ -15,9 +16,7 @@ app.get('/reviews/', getReviews);
 
 app.get('/reviews/meta', getMetadata);
 
-app.post('/reviews/', (req, res) => {
-  res.status(201);
-});
+app.post('/reviews/', postReview);
 
 app.put('/reviews/:review_id/helpful', putHelpful);
 
