@@ -54,6 +54,39 @@ select json_build_object(
 ) as metadata;
 
 --REVIEW POST
+with review_ins as (
+	insert into reviews
+  	values (
+		default,
+		13,
+		5,
+		1659381772127,
+		'this is a summary!',
+		'this is a body for a review, isnt it great. Feels like its the best one ever. It is. It is the best one ever. You know that though. I neednt tell you. So, Im done telling you. It is though.',
+		true,
+		false,
+		'this is a name?',
+		'this@email.com',
+		null,
+		0
+    )
+    returning id as review_id
+	),
+	photo_ins as (
+		insert into reviews_photos
+			values (
+				default,
+				(select review_id from review_ins),
+				'https://images.unsplash.com/photo-1659273144626-63cb708617fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80'
+			)
+	)
+	insert into characteristic_reviews
+		values (
+			default,
+			46,
+			(select review_id from review_ins),
+			5);
+
 --REVIEWS
 insert into reviews
 values (
