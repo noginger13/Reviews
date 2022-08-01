@@ -1,3 +1,5 @@
+--SAMPLE QUERIES
+
 -- REVIEWS
 select r.id as review_id, r.rating, r.summary, r.recommend, r.response, r.body, r.date, r.reviewer_name, r.helpfulness, coalesce(rp.photos, '[]') as photos
 from reviews r
@@ -53,13 +55,37 @@ select json_build_object(
 
 --REVIEW POST
 --REVIEWS
+insert into reviews
+values (
+		default,
+		12,
+		5,
+		1659302163578,
+		'this is a summary!',
+		'this is a body for a review, isnt it great. Feels like its the best one ever. It is. It is the best one ever. You know that though. I needt tell you. So, Im done telling you. It is though.',
+		true,
+		false,
+		'this is a name?',
+		'this@email.com',
+		null,
+		0
+  )
+returning id;
 
---Date
-(select (round(extract(epoch from now()) * 1000)) as date)
 --REVIEWS PHOTOS
+insert into reviews_photos
+values (
+		default,
+		5774953,
+		'https://images.unsplash.com/photo-1659273144626-63cb708617fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80');
 
 --REVIEWS CHAR
-
+insert into characteristic_reviews
+values (
+	default,
+	39,
+	5774953,
+	5);
 
 --HELPFULNESS
 update reviews

@@ -119,3 +119,9 @@ CREATE INDEX characteristic_reviews_review_id_index ON characteristic_reviews (r
 
 --REVIEWS_PHOTOS
 CREATE INDEX reviews_photos_review_id_index ON reviews_photos (review_id);
+
+
+--SETVALS FOR SEQUENCES TO TOTAL AFTER CSV IMPORT
+SELECT setval('characteristic_reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM characteristic_reviews), 1), false);
+SELECT setval('reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews), 1), false);
+SELECT setval('reviews_photos_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews_photos), 1), false);
