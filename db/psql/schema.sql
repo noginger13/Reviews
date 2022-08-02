@@ -115,9 +115,11 @@ CREATE INDEX characteristics_product_id_index ON characteristics (product_id);
 
 --CHARACTERISTIC_REVIEWS
 CREATE INDEX characteristic_reviews_characteristic_id_index ON characteristic_reviews (characteristic_id);
+CREATE INDEX characteristic_reviews_id_index ON characteristic_reviews (id);
 CREATE INDEX characteristic_reviews_review_id_index ON characteristic_reviews (review_id);
 
 --REVIEWS_PHOTOS
+CREATE INDEX reviews_photos_id_index ON reviews_photos (id);
 CREATE INDEX reviews_photos_review_id_index ON reviews_photos (review_id);
 
 
