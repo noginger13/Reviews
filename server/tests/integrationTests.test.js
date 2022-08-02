@@ -12,19 +12,21 @@ export let options = {
     checks: [{ threshold: 'rate == 1.00', abortOnFail: true }],
     http_req_failed: [{ threshold: 'rate == 0.00', abortOnFail: true }]
   },
-  vus: 1,
-  iterations: 1
+  vus: 10,
+  iterations: 10
 };
 
 let session = new Httpx({ baseURL: 'http://localhost:3000/reviews/' });
-let randomProductId = Math.floor(Math.random() * (1000011 - 900000) + 900000);
+
 
 function retrieveProductReviews() {
   describe('Fetch reviews one by one', () => {
     let responses = session.batch([
-      new Get(`?product_id=${randomProductId}`),
-      new Get(`?product_id=${randomProductId}`),
-      new Get(`?product_id=${randomProductId}`)
+      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`)
     ]);
 
     expect(responses, 'responses').to.be.an('array');
@@ -45,9 +47,11 @@ function retrieveProductReviews() {
 function retrieveProductMetadata() {
   describe('Fetch review metadata one by one', () => {
     let responses = session.batch([
-      new Get(`meta?product_id=${randomProductId}`),
-      new Get(`meta?product_id=${randomProductId}`),
-      new Get(`meta?product_id=${randomProductId}`)
+      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
+      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`)
     ]);
 
     expect(responses, 'responses').to.be.an('array');
@@ -55,8 +59,8 @@ function retrieveProductMetadata() {
     responses.forEach((response) => {
       expect(response.status, 'response status').to.equal(200);
       expect(response).to.have.validJsonBody();
-      expect(response.json(), 'reviews').to.be.an('object');
-      expect(response.json(), 'reviews').to.include.keys(
+      expect(response.json(), 'metadata').to.be.an('object');
+      expect(response.json(), 'metadata').to.include.keys(
         'product_id',
         'ratings',
         'recommended',

@@ -9,7 +9,8 @@ export const options = {
   duration: '15s'
 };
 
-const url = 'http://localhost:3000/reviews/meta?product_id=13';
+let randomProductId = Math.floor(Math.random() * (1000011 - 900000) + 900000);
+const url = `http://localhost:3000/reviews/meta?product_id=${randomProductId}`;
 
 export default function () {
   const res = http.get(url);

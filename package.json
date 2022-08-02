@@ -5,7 +5,10 @@
   "main": "server/index.js",
   "scripts": {
     "server-dev": "nodemon --watch db --watch server server/index.js",
-    "build-db": " psql -d reviewapi -f db/psql/schema.sql"
+    "build-db": "psql -d reviewapi -f db/psql/schema.sql",
+    "k6int": "k6 run server/tests/integrationTests.test.js",
+    "k6meta": "k6 run server/tests/getMetadata.test.js",
+    "k6rev": "k6 run server/tests/getReviews.test.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
