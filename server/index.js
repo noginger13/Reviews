@@ -1,4 +1,5 @@
 require('dotenv').config();
+const compression = require('compression');
 const express = require('express');
 
 //Controllers
@@ -10,6 +11,7 @@ const putReport = require('./controllers/putReport.js');
 
 const app = express();
 
+app.use(compression());
 app.use(express.json());
 
 app.get('/reviews/', getReviews);
