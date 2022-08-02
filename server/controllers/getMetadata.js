@@ -48,9 +48,8 @@ module.exports = getMetadata = (req, res) => {
   pool
     .query(allQueryString)
     .then((results) => {
-      let metadata = results.rows[0];
       res.status(200);
-      res.send(metadata);
+      res.send(results.rows[0].metadata);
     })
     .catch((err) => {
       console.log(err);

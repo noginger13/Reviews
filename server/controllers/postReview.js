@@ -15,15 +15,25 @@ module.exports = postReview = (req, res) => {
 
   //REVIEWS_PHOTOS VALUES
   let photoValues = '';
+  let photoString = '';
 
-  for (let i = 0; i < req.body.photos.length; i++) {
-    let currentUrl = `$${i + 5}`;
-    reviewValues.push(req.body.photos[i]);
-    if (i < req.body.photos.length - 1) {
-      photoValues += `(default, (select review_id from review_ins), ${currentUrl}), `;
-    } else {
-      photoValues += `(default, (select review_id from review_ins), ${currentUrl})`;
+
+  if (req.body.photos.length > 0) {
+    for (let i = 0; i < req.body.photos.length; i++) {
+      let currentUrl = `$${i + 5}`;
+      reviewValues.push(req.body.photos[i]);
+      if (i < req.body.photos.length - 1) {
+        photoValues += `(default, (select review_id from review_ins), ${currentUrl}), `;
+      } else {
+        photoValues += `(default, (select review_id from review_ins), ${currentUrl})`;
+      }
     }
+
+    photoString = `,
+    photo_ins as (
+      insert into reviews_photos
+        values ${photoValues}
+    )`
   }
 
   //CHARACTERISTICS_REVIEWS VALUES
@@ -59,11 +69,7 @@ module.exports = postReview = (req, res) => {
       0
       )
       returning id as review_id
-    ),
-    photo_ins as (
-      insert into reviews_photos
-        values ${photoValues}
-    )
+    )${photoString}
     insert into characteristic_reviews
       values ${charValues};`;
 
