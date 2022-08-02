@@ -12,6 +12,7 @@
     "k6rev": "k6 run server/tests/getReviews.test.js"
   },
   "dependencies": {
+    "artillery": "^2.0.0-22",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "newrelic": "^8.17.0",
