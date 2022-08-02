@@ -24,7 +24,7 @@ module.exports = getReviews = (req, res) => {
     count: count
   };
 
-  let allQueryString = `select r.id as review_id, r.rating, r.summary, r.recommend, r.response, r.body, (SELECT to_char(TIMESTAMP WITH Time Zone 'epoch' + r.date * INTERVAL '1 millisecond', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')), r.reviewer_name, r.helpfulness, coalesce(rp.photos, '[]') as photos
+  let allQueryString = `select r.id as review_id, r.rating, r.summary, r.recommend, r.response, r.body, (SELECT to_char(TIMESTAMP WITH Time Zone 'epoch' + r.date * INTERVAL '1 millisecond', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')) as date, r.reviewer_name, r.helpfulness, coalesce(rp.photos, '[]') as photos
   from reviews r
   left join lateral (
     select json_agg(json_build_object( 'id', rp.id, 'url', rp.url)) as photos

@@ -18,15 +18,24 @@ export let options = {
 
 let session = new Httpx({ baseURL: 'http://localhost:3000/reviews/' });
 
-
 function retrieveProductReviews() {
   describe('Fetch reviews one by one', () => {
     let responses = session.batch([
-      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`)
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      )
     ]);
 
     expect(responses, 'responses').to.be.an('array');
@@ -40,6 +49,50 @@ function retrieveProductReviews() {
         'count',
         'results'
       );
+      expect(response.json().product).to.be.a('string');
+      expect(response.json().page).to.be.a('number');
+      expect(response.json().count).to.be.a('number');
+    });
+  });
+
+  describe('Results should have all attributes', () => {
+    let responses = session.batch([
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      ),
+      new Get(
+        `?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`
+      )
+    ]);
+
+    expect(responses, 'responses').to.be.an('array');
+
+    responses.forEach((response) => {
+      expect(response.status, 'response status').to.equal(200);
+      expect(response).to.have.validJsonBody();
+      expect(response.json().results, 'results').to.be.an('array');
+      if (response.json().results[0]) {
+        expect(response.json().results[0].photos, 'photos').to.be.an('array');
+        expect(response.json().results[0], 'results').to.include.keys(
+          'review_id',
+          'photos',
+          'date'
+        );
+        expect(response.json().results, 'results').to.not.include.keys(
+          'id',
+          'reported',
+          'reviewer_email'
+        );
+      }
     });
   });
 }
@@ -47,11 +100,31 @@ function retrieveProductReviews() {
 function retrieveProductMetadata() {
   describe('Fetch review metadata one by one', () => {
     let responses = session.batch([
-      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`),
-      new Get(`meta?product_id=${Math.floor(Math.random() * (1000011 - 900000) + 900000)}`)
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      )
     ]);
 
     expect(responses, 'responses').to.be.an('array');
@@ -66,6 +139,45 @@ function retrieveProductMetadata() {
         'recommended',
         'characteristics'
       );
+    });
+  });
+
+  describe('Each review metadata should have two values for recommended', () => {
+    let responses = session.batch([
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      ),
+      new Get(
+        `meta?product_id=${Math.floor(
+          Math.random() * (1000011 - 900000) + 900000
+        )}`
+      )
+    ]);
+
+    expect(responses, 'responses').to.be.an('array');
+
+    responses.forEach((response) => {
+      expect(response.status, 'response status').to.equal(200);
+      expect(response).to.have.validJsonBody();
+      expect(response.json().recommended, 'metadata').to.be.an('object');
+      expect(response.json().recommended, 'metadata').to.include.keys('0', '1');
     });
   });
 }
