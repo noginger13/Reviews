@@ -1,4 +1,4 @@
--- Database: reviewapi
+--DATABASE REVIEWAPI
 
 --CREATE DATABASE
 DROP DATABASE IF EXISTS reviewapi;
@@ -40,11 +40,16 @@ CREATE TABLE reviews (
   helpfulness integer NOT NULL
 );
 
--- COPY CSV DATA
+--COPY CSV DATA
 COPY reviews
   FROM '/Users/michaelschoenecker/Documents/hackreactor/rfe-neptunium/Reviews/db/data/reviews.csv'
   DELIMITER ','
   CSV HEADER;
+
+--TRANSFORM RESPNSE COLUMN
+UPDATE reviews
+SET response = null
+WHERE response = 'null';
 
 
 --CHARACTERISTICS
