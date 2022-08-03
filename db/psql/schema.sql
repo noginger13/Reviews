@@ -46,7 +46,7 @@ COPY reviews
   DELIMITER ','
   CSV HEADER;
 
---TRANSFORM RESPNSE COLUMN
+--TRANSFORM RESPONSE COLUMN
 UPDATE reviews
 SET response = null
 WHERE response = 'null';

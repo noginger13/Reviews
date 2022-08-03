@@ -12,16 +12,16 @@
     "k6rev": "k6 run server/tests/getReviews.test.js"
   },
   "dependencies": {
-    "artillery": "^2.0.0-22",
     "compression": "^1.7.4",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "newrelic": "^8.17.0",
     "pg": "^8.7.3"
   },
   "devDependencies": {
+    "artillery": "^2.0.0-22",
     "eslint": "^8.20.0",
     "eslint-config-airbnb": "^19.0.4",
+    "newrelic": "^9.0.0",
     "nodemon": "^2.0.19"
   }
 }
