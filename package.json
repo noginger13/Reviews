@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "server-dev": "nodemon --watch db --watch server server/index.js",
+    "server-prod": "NODE_ENV=production node server/index.js",
     "newrelic": "node -r newrelic server/index.js",
     "build-db": "psql -d reviewapi -f db/psql/schema.sql",
     "k6int": "k6 run server/tests/integrationTests.test.js",
@@ -18,7 +19,6 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "artillery": "^2.0.0-22",
     "eslint": "^8.20.0",
     "eslint-config-airbnb": "^19.0.4",
     "newrelic": "^9.0.0",
