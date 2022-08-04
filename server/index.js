@@ -13,6 +13,7 @@ const app = express();
 
 app.use(compression());
 app.use(express.json());
+app.use(express.static('public'));
 
 app.get('/reviews/', getReviews);
 
