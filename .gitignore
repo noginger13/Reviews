@@ -2,6 +2,8 @@
 *.csv
 *.DS_Store
 *.map
+*.clinic
+*.0x
 node_modules/
 newrelic.js
 newrelic_agent.log
