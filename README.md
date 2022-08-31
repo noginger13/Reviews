@@ -3,6 +3,7 @@ RESTful API and database for product reviews supporting a retail product page
 
 ## Tech Stack
 ![Node](https://img.shields.io/badge/-Node-9ACD32?logo=node.js&logoColor=white&style=for-the-badge)
+![Nodemon](https://img.shields.io/badge/-Nodemon-76D04B?logo=nodemon&logoColor=white&style=for-the-badge)
 ![Express](https://img.shields.io/badge/express-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![New Relic](https://img.shields.io/badge/-NewRelic-008C99?logo=newrelic&logoColor=white&style=for-the-badge)
