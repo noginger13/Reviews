@@ -10,7 +10,7 @@ RESTful API and database for product reviews supporting a retail product page
 ![K6](https://img.shields.io/badge/-k6-7D64FF?logo=k6&logoColor=white&style=for-the-badge)
 
 ## Getting Started
-### Installation
+### Setup
 1. Install dependencies
 ```
 npm install
